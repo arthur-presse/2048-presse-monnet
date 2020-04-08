@@ -16,11 +16,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    gamewidget.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    move.cpp
 
 HEADERS += \
-    mainwindow.h
+    common.h \
+    gamewidget.h \
+    mainwindow.h \
+    move.h
 
 FORMS += \
     mainwindow.ui
