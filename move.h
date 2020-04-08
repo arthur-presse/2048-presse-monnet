@@ -11,10 +11,10 @@ protected:
     typedef int (Move::* deep)(Case *grid);
 
     int x;
-
-    virtual int getcloser(int x) = 0;
     virtual bool next(void) = 0;
+    virtual int getcloser(int x) = 0;
     virtual void init(void) = 0;
+
     virtual Move::deep getfusion(void) = 0;
     int Fusion_Possible_par_Ligne(Case *grid);
     int Fusion_Possible_par_Colonne(Case *grid);
