@@ -63,7 +63,7 @@
       </widget>
      </item>
      <item>
-      <widget class="GameWidget" name="GameWindow" native="true"/>
+      <widget class="GameWidget" name="Game" native="true"/>
      </item>
     </layout>
    </widget>
