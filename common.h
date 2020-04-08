@@ -8,7 +8,7 @@ typedef struct Case {
     //value est la valeur de la case de la grille
     int value;
     // new et fusion servent à l'affichage graphique du jeu
-    bool new;
+    bool newvalue;
     bool fusion;
 
 }

@@ -19,8 +19,6 @@ protected:
     int Fusion_Possible_par_Ligne(Case *grid);
     int Fusion_Possible_par_Colonne(Case *grid);
 
-
-
 public:
     bool move(Case *grille, int &val, bool anim = true);
 
