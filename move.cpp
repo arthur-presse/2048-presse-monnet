@@ -54,7 +54,7 @@ int Move::Fusion_Possible_par_Colonne(Case *grid){
 }
 
 
-bool Move::move(Case *grid, int &val, bool anim){
+bool Move::doMove(Case *grid, int &val){
 
     int nbMove = 0;
     bool moved;
@@ -65,16 +65,14 @@ bool Move::move(Case *grid, int &val, bool anim){
         do {
             int closer = getcloser(x);
             if(!grid[x].fusion && grid[x].value !=0){
-                if(!grid[closer].fusion && grid[closer].value == grid[x].value)
+                if(!grid[closer].fusion && grid[closer].value == grid[x].value){
                     grid[closer].value = grid[closer].value*2;
-                    if(anim){
-                        grid[closer].fusion = true;
-                }
-                grid[x].value = 0;
+                    grid[closer].fusion = true;
+                    grid[x].value = 0;
 
-                val = qMax(grid[closer].value, val);
-                moved = true;
-                nbMove = nbMove + 1
+                    val = qMax(grid[closer].value, val);
+                    moved = true;
+                    nbMove = nbMove + 1;
                 } else if (grid[closer].value==0){
                     grid[closer].value = grid[x].value;
                     grid[x].value = 0;
@@ -84,6 +82,6 @@ bool Move::move(Case *grid, int &val, bool anim){
                 }
             }
         }while(next());
-    }while(Moved);
+    }while(moved);
     return nbMove !=0;
 }
