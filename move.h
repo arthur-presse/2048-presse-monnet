@@ -25,7 +25,7 @@ public:
 //---Création de chacun des déplacements---
 
 //mouvement vers le haut
-class MoveHigh : public Move {
+class MoveUp : public Move {
 protected:
     virtual int getcloser(int x);
     virtual bool next(void);

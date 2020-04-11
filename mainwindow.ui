@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>2048</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="layoutDirection">
@@ -58,7 +58,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Score : x</string>
+        <string>Score : 0</string>
        </property>
       </widget>
      </item>

@@ -6,6 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    installEventFilter(this);
+    ui->score_label->setText("Score : "+QString::number(ui->Game->getScore()));
 }
 
 MainWindow::~MainWindow()

@@ -100,3 +100,31 @@ bool GameWidget::check_lost(){
     }
     return true;
 }
+
+GameWidget::eventResult GameWidget::Up(){
+    //appelé quand le bouton pressé est "haut"
+    MoveUp move;
+    return action(&move);
+}
+
+GameWidget::eventResult GameWidget::Down(){
+    //appelé quand le bouton pressé est "bas"
+    MoveDown move;
+    return action(&move);
+}
+
+GameWidget::eventResult GameWidget::Left(){
+    //appelé quand le bouton pressé est "gauche"
+    MoveLeft move;
+    return action(&move);
+}
+
+GameWidget::eventResult GameWidget::Right(){
+    //appelé quand le bouton pressé est "droite"
+    MoveRight move;
+    return action(&move);
+}
+
+int GameWidget::getScore(){
+    return score;
+}
