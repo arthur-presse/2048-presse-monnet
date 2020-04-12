@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QKeyEvent>
 #include <QMessageBox>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,6 +22,7 @@ MainWindow::~MainWindow()
 bool MainWindow::eventFilter(QObject *object, QEvent *event){
     // on surcharge la méthode eventFilter pour récupérer les mouvements
     // haut, bas, gauche, droite.
+
     if (event->type() == QEvent::KeyPress){
         QKeyEvent* kev = static_cast<QKeyEvent*>(event);
         bool check_key = false;

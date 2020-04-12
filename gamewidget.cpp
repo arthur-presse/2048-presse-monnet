@@ -1,15 +1,48 @@
 #include "gamewidget.h"
+#include <QPainter>
+#include <QDebug>
+#include <QTimer>
+// - - - - - - - - - - - - tableau couleurs - - - - - - - - - - - - - - - - - - - - - - - -
+static QColor color_tab[12] = {
+    QColor(200, 200, 200), // 0
+    QColor(233, 222, 187), // 2
+    QColor(255, 205, 243), // 4
+    QColor(129, 197, 122), // 8
+    QColor(157, 175, 255), // 16
+    QColor(255, 146,  51), // 32
+    QColor(173,  35,  35), // 64
+    QColor(129,  38, 192), // 128
+    QColor( 29, 105,  20), // 256
+    QColor( 42,  75, 215), // 512
+    QColor( 41, 208, 208), // 1024
+    QColor(255, 238,  51), // 2048
+};
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GameWidget::GameWidget(QWidget *parent) : QWidget(parent)
 {
+    //définition du timer pour l'animation
+    timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(timer_timeout()));
+
     srand(time(NULL)); //initialisation de la fonction rand()
     newGame(); //on crée une nouvelle partie
+
+    timer->start();
 };
+
+void GameWidget::timer_timeout(void){
+    repaint();
+}
 
 void GameWidget::newGame(void) {
     // initialisation du score et de la grille des cases
     score = 0;
-    memset(grid, 0, NbCase * 3);
+    for(int i=0;i<NbCase;i++){
+        grid[i].value = 0;
+        grid[i].newvalue = false;
+        grid[i].fusion = false;
+    }
 
     //ajout de deux nouvelles cases dans la grille pour commencer
     add_item();
@@ -127,4 +160,46 @@ GameWidget::eventResult GameWidget::Right(){
 
 int GameWidget::getScore(){
     return score;
+}
+
+void GameWidget::paintEvent(QPaintEvent *){
+    //surcharge de la méthode de dessin
+    QPainter painter(this);
+
+    //définition de la taille de grille en ft de celle de la fenêtre
+    int gridSize = qMin(width(),height()) - CONTOUR;
+    int caseSize = (gridSize - CONTOUR*COTE/2)/COTE;
+    int xGrid = (width() - gridSize)/2 ;
+    int yGrid = (height() - gridSize)/2 ;
+
+    //tracé du contour
+    QPen pen(Qt::gray);
+    pen.setWidth(CONTOUR);
+    painter.setPen(pen);
+    painter.drawRect(xGrid, yGrid, gridSize, gridSize);
+
+    //tracé de chaque case
+    for(int i=0;i<NbCase;i++){
+        //definition de la case
+        int xCase = (i % COTE) * caseSize + CONTOUR * ((i % COTE) + 1)/2 + xGrid;
+        int yCase = (i / COTE) * caseSize + CONTOUR * ((i / COTE) + 1)/2 + yGrid;
+        QRect rectangle(xCase,yCase,caseSize,caseSize);
+
+        //definition de la couleur et tracé
+        int color = (int)log2(grid[i].value);
+        painter.setBrush(QBrush(color_tab[color]));
+        painter.drawRect(rectangle);
+
+    }
+}
+
+QString GameWidget::grid2string(){
+    QString list = "";
+    for(int i=0; i<NbCase; i++){
+        list.append(QString::number(grid[i].value) + " ");
+        if (i % COTE == 3){
+            list.append("// ");
+        }
+    }
+    return list;
 }

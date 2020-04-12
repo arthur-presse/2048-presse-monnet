@@ -2,8 +2,13 @@
 #define COMMON_H
 
 #define COTE    4
-#define NbCase  (COTE^2)
+#define NbCase  (COTE * COTE)
 
+// - - - - - - - - - - - - - - - - - - - - - - - -
+//définition des paramètres graphiques
+#define CONTOUR 5
+
+// - - - - - - - - - - - - - - - - - - - - - - - -
 typedef struct {
     //value est la valeur de la case de la grille
     int value;
