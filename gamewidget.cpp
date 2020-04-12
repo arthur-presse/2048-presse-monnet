@@ -2,7 +2,7 @@
 #include <QPainter>
 #include <QDebug>
 #include <QTimer>
-#include <tgmath.h>
+#include <ctgmath>
 // - - - - - - - - - - - - tableau couleurs - - - - - - - - - - - - - - - - - - - - - - - -
 static QColor color_tab[12] = {
     QColor(200, 200, 200), // 0
@@ -22,7 +22,7 @@ static QColor color_tab[12] = {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GameWidget::GameWidget(QWidget *parent) : QWidget(parent)
 {
-    //définition du timer pour l'animation
+    //définition du timer pour un repaint permanent en cas de redimensionnement
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(timer_timeout()));
 
@@ -31,6 +31,10 @@ GameWidget::GameWidget(QWidget *parent) : QWidget(parent)
 
     timer->start();
 };
+
+GameWidget::~GameWidget(void){
+    delete timer;
+}
 
 void GameWidget::timer_timeout(void){
     repaint();
@@ -41,7 +45,6 @@ void GameWidget::newGame(void) {
     score = 0;
     for(int i=0;i<NbCase;i++){
         grid[i].value = 0;
-        grid[i].newvalue = false;
         grid[i].fusion = false;
     }
 
@@ -70,7 +73,6 @@ bool GameWidget::add_item(void){
         int new_case_id = rand() % (last_empty_case + 1);
         int new_case_value = 2 * (rand() % 2 + 1); //peut valoir 2 ou 4
         grid[empty_grid[new_case_id]].value = new_case_value;
-        grid[empty_grid[new_case_id]].newvalue = true;
 
         score = qMax(score,grid[empty_grid[new_case_id]].value);
 
@@ -173,6 +175,9 @@ void GameWidget::paintEvent(QPaintEvent *){
     int xGrid = (width() - gridSize)/2 ;
     int yGrid = (height() - gridSize)/2 ;
 
+    //calcul de la taille de police si nécessaire
+    adapt_police(caseSize);
+
     //tracé du contour
     QPen pen(Qt::gray);
     pen.setWidth(CONTOUR);
@@ -194,22 +199,52 @@ void GameWidget::paintEvent(QPaintEvent *){
             color = 0;
         };
 
+        //tracé de la case
+        painter.setPen(pen);
         painter.setBrush(QBrush(color_tab[color]));
         painter.drawRect(rectangle);
 
-        if(grid[i].value != 0 && !grid[i].newvalue) {
-            QFont font(this->font());
+        //on écrit les nombres pour les cases non nulles
+        if(grid[i].value != 0) {
+            QFont font(this->font);
             painter.setFont(font);
             painter.setPen(QPen(Qt::black));
             painter.drawText(rectangle, Qt::AlignCenter, QString::number(grid[i].value));
         }
 
+        //on réinitialise les infos sur les fusions
         if (grid[i].fusion){
             grid[i].fusion = false;
         }
-        if (grid[i].newvalue){
-            grid[i].newvalue = false;
+    }
+}
+
+void GameWidget::resizeEvent(QResizeEvent *){
+    forceFont = true;
+}
+
+void GameWidget::adapt_police(int caseSize){
+    //fonction qui permet d'adapter la police à la taille de la case
+    //n'est activée qu'au démarrage et en cas de resizeEvent
+    if(forceFont) {
+        int fontSize = 100;
+        QString texte = QString::number(2048);
+        int largeur = 0, hauteur = 0;
+
+        do {
+            font = QFont("Arial", fontSize);
+            QFontMetrics fm(font);
+            largeur = fm.width(texte) + 2 * CONTOUR;
+            hauteur = fm.height() + 2 * CONTOUR;
+
+            fontSize--;
+        }while((largeur > caseSize || hauteur > caseSize) && fontSize > 1);
+
+        if(fontSize < 1) {
+            fontSize = 1;
         }
+        //on désactive le calcul de la taille de la police
+        forceFont = false;
     }
 }
 
