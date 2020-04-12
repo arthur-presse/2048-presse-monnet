@@ -12,7 +12,6 @@ protected:
     virtual bool next(void) = 0;
     virtual int getcloser(int x) = 0;
     virtual void init(void) = 0;
-
 public:
     bool doMove(Case *grid, int &val);
 };

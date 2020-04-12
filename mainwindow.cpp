@@ -53,7 +53,6 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event){
          // Si la touche était correcte, on verifie si l'issue du jeu à changé
         if(check_key){
             ui->score_label->setText("Score : "+QString::number(ui->Game->getScore()));
-
             if(result == GameWidget::isWon){
                 QMessageBox::information(this,"Victoire","Vous avez gagné ! Bravissimo !",QMessageBox::Ok);
                 ui->Game->newGame();

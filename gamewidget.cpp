@@ -69,10 +69,10 @@ bool GameWidget::add_item(void){
     if(last_empty_case != -1){
         int new_case_id = rand() % (last_empty_case + 1);
         int new_case_value = 2 * (rand() % 2 + 1); //peut valoir 2 ou 4
-        grid[new_case_id].value = new_case_value;
-        grid[new_case_id].newvalue = true;
+        grid[empty_grid[new_case_id]].value = new_case_value;
+        grid[empty_grid[new_case_id]].newvalue = true;
 
-        score = qMax(score,grid[new_case_id].value);
+        score = qMax(score,grid[empty_grid[new_case_id]].value);
 
         return true; // on a pu ajouter une nouvelle case
     }
@@ -190,7 +190,12 @@ void GameWidget::paintEvent(QPaintEvent *){
         int color = (int)log2(grid[i].value);
         painter.setBrush(QBrush(color_tab[color]));
         painter.drawRect(rectangle);
-
+        if (grid[i].fusion){
+            grid[i].fusion = false;
+        }
+        if (grid[i].newvalue){
+            grid[i].newvalue = false;
+        }
     }
 }
 
