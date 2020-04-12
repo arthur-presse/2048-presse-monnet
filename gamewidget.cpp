@@ -187,9 +187,23 @@ void GameWidget::paintEvent(QPaintEvent *){
         QRect rectangle(xCase,yCase,caseSize,caseSize);
 
         //definition de la couleur et tracé
-        int color = (int)log2(grid[i].value);
+        int color;
+        if(grid[i].value != 0){
+            color = (int)log2(grid[i].value);
+        } else {
+            color = 0;
+        };
+
         painter.setBrush(QBrush(color_tab[color]));
         painter.drawRect(rectangle);
+
+        if(grid[i].value != 0 && !grid[i].newvalue) {
+            QFont font(this->font());
+            painter.setFont(font);
+            painter.setPen(QPen(Qt::black));
+            painter.drawText(rectangle, Qt::AlignCenter, QString::number(grid[i].value));
+        }
+
         if (grid[i].fusion){
             grid[i].fusion = false;
         }
