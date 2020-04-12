@@ -33,3 +33,59 @@ bool Move::doMove(Case *grid, int &val){
     }while(moved);
     return nbMove !=0;
 }
+
+// - - - - - - - - - - - - MoveUp - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bool MoveUp::next(){
+    return false;
+}
+
+int MoveUp::getcloser(int x){
+    return 0;
+}
+
+void MoveUp::init(){
+
+}
+
+// - - - - - - - - - - - - MoveDown - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bool MoveDown::next(){
+    return false;
+}
+
+int MoveDown::getcloser(int x){
+    return 0;
+}
+
+void MoveDown::init(){
+
+}
+
+// - - - - - - - - - - - - MoveLeft - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bool MoveLeft::next(){
+    return false;
+}
+
+int MoveLeft::getcloser(int x){
+    return 0;
+}
+
+void MoveLeft::init(){
+
+}
+
+// - - - - - - - - - - - - MoveRight - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bool MoveRight::next(){
+    return false;
+}
+
+int MoveRight::getcloser(int x){
+    return 0;
+}
+
+void MoveRight::init(){
+
+}
