@@ -2,6 +2,7 @@
 #include <QPainter>
 #include <QDebug>
 #include <QTimer>
+#include <tgmath.h>
 // - - - - - - - - - - - - tableau couleurs - - - - - - - - - - - - - - - - - - - - - - - -
 static QColor color_tab[12] = {
     QColor(200, 200, 200), // 0

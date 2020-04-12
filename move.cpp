@@ -36,56 +36,88 @@ bool Move::doMove(Case *grid, int &val){
 
 // - - - - - - - - - - - - MoveUp - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bool MoveUp::next(){
+bool MoveUp::next(void){
+    if(x + 1 < NbCase) {
+        x=x+1;
+        return true;
+    }
+
     return false;
 }
 
 int MoveUp::getcloser(int x){
-    return 0;
+    return x - COTE;
 }
 
-void MoveUp::init(){
-
+void MoveUp::init(void){
+    x = COTE;
 }
 
 // - - - - - - - - - - - - MoveDown - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bool MoveDown::next(){
+bool MoveDown::next(void){
+    if(x - 1 >= 0) {
+        x=x-1;
+
+        return true;
+    }
+
     return false;
 }
 
+
 int MoveDown::getcloser(int x){
-    return 0;
+    return x + COTE;
 }
 
-void MoveDown::init(){
-
+void MoveDown::init(void){
+    x = NbCase - COTE - 1;
 }
 
 // - - - - - - - - - - - - MoveLeft - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bool MoveLeft::next(){
+bool MoveLeft::next(void){
+    if(x + 1 < NbCase) {
+        x=x+1;
+        if(x % COTE == 0) {
+            x=x+1;
+        }
+
+        return true;
+    }
+
     return false;
 }
 
+
 int MoveLeft::getcloser(int x){
-    return 0;
+    return x - 1;
 }
 
-void MoveLeft::init(){
-
+void MoveLeft::init(void){
+    x = 1;
 }
 
 // - - - - - - - - - - - - MoveRight - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bool MoveRight::next(){
+bool MoveRight::next(void){
+    if(x - 1 >= 0) {
+        x=x-1;
+        if(x % COTE == COTE - 1) {
+            x=x-1;
+        }
+
+        return true;
+    }
+
     return false;
 }
 
+
 int MoveRight::getcloser(int x){
-    return 0;
+    return x + 1;
 }
 
-void MoveRight::init(){
-
+void MoveRight::init(void){
+    x = NbCase-2;
 }
