@@ -15,6 +15,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    bool eventFilter(QObject *object, QEvent *event);
+
+private slots:
+    void on_actionNouvelle_partie_triggered();
+
+    void on_actionQuitter_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

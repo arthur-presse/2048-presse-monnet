@@ -4,20 +4,14 @@
 #include "common.h"
 
 
-
+// création d'une classe abstraite de mouvement
 class Move
 {
 protected:
-    typedef int (Move::* deep)(Case *grid);
-
     int x;
     virtual bool next(void) = 0;
     virtual int getcloser(int x) = 0;
     virtual void init(void) = 0;
-
-    virtual Move::deep getfusion(void) = 0;
-    int Fusion_Possible_par_Ligne(Case *grid);
-    int Fusion_Possible_par_Colonne(Case *grid);
 
 public:
     bool doMove(Case *grid, int &val);
@@ -30,7 +24,6 @@ protected:
     virtual int getcloser(int x);
     virtual bool next(void);
     virtual void init(void);
-    virtual Move::deep getfusion(void);
 };
 
 //mouvement vers le bas
@@ -39,7 +32,6 @@ protected:
     virtual int getcloser(int x);
     virtual bool next(void);
     virtual void init(void);
-    virtual Move::deep getfusion(void);
 };
 
 //mouvement vers la gauche
@@ -48,7 +40,6 @@ protected:
     virtual int getcloser(int x);
     virtual bool next(void);
     virtual void init(void);
-    virtual Move::deep getfusion(void);
 };
 
 //mouvement vers la droite
@@ -57,6 +48,5 @@ protected:
     virtual int getcloser(int x);
     virtual bool next(void);
     virtual void init(void);
-    virtual Move::deep getfusion(void);
 };
 #endif // MOVE_H
