@@ -98,7 +98,7 @@ GameWidget::eventResult GameWidget::action(Move *move){
             win = true;
             return isWon;
         } else {
-            return isMoving;
+            return check_lost() ? isLost : isMoving;
         };
     //en cas d'échec du mouvement
     } else {
@@ -121,7 +121,7 @@ bool GameWidget::check_lost(){
     };
 
     for(int i=0;i<NbCase;i++){
-        // verification des fusions horizontale
+        // verification des fusions horizontales
         if(i % COTE != COTE - 1){
             if (grid[i].value == grid[i+1].value){
                 return false;
@@ -129,7 +129,7 @@ bool GameWidget::check_lost(){
         }
         //vérification verticale
         if(i / COTE != COTE - 1){
-            if (grid[i].value == grid[i+1].value){
+            if (grid[i].value == grid[i+COTE].value){
                 return false;
             }
         }
