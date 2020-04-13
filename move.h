@@ -12,8 +12,11 @@ protected:
     virtual bool next(void) = 0;
     virtual int getcloser(int x) = 0;
     virtual void init(void) = 0;
+    int COTE;
+    int NbCase;
 public:
     bool doMove(Case *grid, int &val);
+    explicit Move(int cote);
 };
 //---Création de chacun des déplacements---
 
@@ -23,6 +26,8 @@ protected:
     virtual int getcloser(int x);
     virtual bool next(void);
     virtual void init(void);
+public:
+    explicit MoveUp(int cote);
 };
 
 //mouvement vers le bas
@@ -31,6 +36,8 @@ protected:
     virtual int getcloser(int x);
     virtual bool next(void);
     virtual void init(void);
+public:
+    explicit MoveDown(int cote);
 };
 
 //mouvement vers la gauche
@@ -39,6 +46,8 @@ protected:
     virtual int getcloser(int x);
     virtual bool next(void);
     virtual void init(void);
+public:
+    explicit MoveLeft(int cote);
 };
 
 //mouvement vers la droite
@@ -47,5 +56,7 @@ protected:
     virtual int getcloser(int x);
     virtual bool next(void);
     virtual void init(void);
+public:
+    explicit MoveRight(int cote);
 };
 #endif // MOVE_H

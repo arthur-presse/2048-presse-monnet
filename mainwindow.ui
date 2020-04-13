@@ -56,19 +56,54 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionNouvelle_partie"/>
+    <widget class="QMenu" name="menuNouvelle_Partie">
+     <property name="title">
+      <string>Nouvelle Partie</string>
+     </property>
+     <addaction name="action4x4_cases"/>
+     <addaction name="action5x5_cases"/>
+     <addaction name="action6x6_cases"/>
+     <addaction name="action7x7_cases"/>
+     <addaction name="action8x8_cases"/>
+    </widget>
+    <addaction name="menuNouvelle_Partie"/>
     <addaction name="actionQuitter"/>
    </widget>
    <addaction name="menuFichier"/>
   </widget>
-  <action name="actionNouvelle_partie">
-   <property name="text">
-    <string>Nouvelle Partie</string>
-   </property>
-  </action>
   <action name="actionQuitter">
    <property name="text">
     <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionnombre_de_cases">
+   <property name="text">
+    <string>nombre de cases</string>
+   </property>
+  </action>
+  <action name="action4x4_cases">
+   <property name="text">
+    <string>4x4 cases</string>
+   </property>
+  </action>
+  <action name="action5x5_cases">
+   <property name="text">
+    <string>5x5 cases</string>
+   </property>
+  </action>
+  <action name="action6x6_cases">
+   <property name="text">
+    <string>6x6 cases</string>
+   </property>
+  </action>
+  <action name="action7x7_cases">
+   <property name="text">
+    <string>7x7 cases</string>
+   </property>
+  </action>
+  <action name="action8x8_cases">
+   <property name="text">
+    <string>8x8 cases</string>
    </property>
   </action>
  </widget>

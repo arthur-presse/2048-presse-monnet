@@ -71,13 +71,59 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event){
 
 }
 
-void MainWindow::on_actionNouvelle_partie_triggered(){
-    //fonction du bouton Nouvelle Partie crée par le menu designer
-    ui->Game->newGame();
-    ui->score_label->setText("Score : "+QString::number(ui->Game->getScore()));
-}
 
 void MainWindow::on_actionQuitter_triggered(){
     //fonction du bouton Quitter crée par le menu designer
     QApplication::quit();
 }
+
+void MainWindow::on_action4x4_cases_triggered()
+{
+    //fonction du bouton Nouvelle Partie crée par le menu designer
+    COTE = 4;
+    NbCase = COTE*COTE;
+
+    ui->Game->newGame(COTE);
+    ui->score_label->setText("Score : "+QString::number(ui->Game->getScore()));
+}
+
+
+void MainWindow::on_action5x5_cases_triggered()
+{
+    COTE = 5;
+    NbCase = COTE*COTE;
+    //fonction du bouton Nouvelle Partie crée par le menu designer
+    ui->Game->newGame(COTE);
+    ui->score_label->setText("Score : "+QString::number(ui->Game->getScore()));
+}
+
+
+void MainWindow::on_action6x6_cases_triggered()
+{
+    COTE = 6;
+    NbCase = COTE*COTE;
+    //fonction du bouton Nouvelle Partie crée par le menu designer
+    ui->Game->newGame(COTE);
+    ui->score_label->setText("Score : "+QString::number(ui->Game->getScore()));
+}
+
+
+void MainWindow::on_action7x7_cases_triggered()
+{
+    //fonction du bouton Nouvelle Partie crée par le menu designer
+    COTE = 7;
+    NbCase = COTE*COTE;
+    ui->Game->newGame(COTE);
+    ui->score_label->setText("Score : "+QString::number(ui->Game->getScore()));
+}
+
+
+void MainWindow::on_action8x8_cases_triggered()
+{
+    COTE = 8;
+    NbCase = COTE*COTE;
+    //fonction du bouton Nouvelle Partie crée par le menu designer
+    ui->Game->newGame(COTE);
+    ui->score_label->setText("Score : "+QString::number(ui->Game->getScore()));
+}
+

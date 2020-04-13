@@ -13,8 +13,10 @@ public:
     typedef enum {isWon, isMoving, isLost, isNone} eventResult;
     explicit GameWidget(QWidget *parent = nullptr);
     ~GameWidget(void);
+    int COTE = 4;
+    int NbCase = 16;
     int getScore(void);
-    void newGame(void);
+    void newGame(int cote = 4);
     eventResult Up(void);
     eventResult Down(void);
     eventResult Left(void);
@@ -25,7 +27,7 @@ protected:
     virtual void resizeEvent(QResizeEvent *);
 private:
     QFont font;
-    Grid grid;
+    Case* grid;
     int score;
     bool win;
     bool forceFont;

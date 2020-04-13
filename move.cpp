@@ -1,6 +1,10 @@
 #include <QtGlobal>
 #include <QtDebug>
 #include "move.h"
+Move::Move(int cote){
+    COTE = cote;
+    NbCase = cote * cote;
+}
 
 bool Move::doMove(Case *grid, int &val){
 
@@ -35,6 +39,7 @@ bool Move::doMove(Case *grid, int &val){
 }
 
 // - - - - - - - - - - - - MoveUp - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+MoveUp::MoveUp(int cote) : Move(cote){}
 
 bool MoveUp::next(void){
     if(x + 1 < NbCase) {
@@ -54,7 +59,7 @@ void MoveUp::init(void){
 }
 
 // - - - - - - - - - - - - MoveDown - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+MoveDown::MoveDown(int cote) : Move(cote){}
 bool MoveDown::next(void){
     if(x - 1 >= 0) {
         x=x-1;
@@ -75,7 +80,7 @@ void MoveDown::init(void){
 }
 
 // - - - - - - - - - - - - MoveLeft - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+MoveLeft::MoveLeft(int cote) : Move(cote){}
 bool MoveLeft::next(void){
     if(x + 1 < NbCase) {
         x=x+1;
@@ -99,7 +104,7 @@ void MoveLeft::init(void){
 }
 
 // - - - - - - - - - - - - MoveRight - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+MoveRight::MoveRight(int cote) : Move(cote){}
 bool MoveRight::next(void){
     if(x - 1 >= 0) {
         x=x-1;

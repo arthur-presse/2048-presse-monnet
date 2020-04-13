@@ -19,11 +19,16 @@ protected:
     bool eventFilter(QObject *object, QEvent *event);
 
 private slots:
-    void on_actionNouvelle_partie_triggered();
-
     void on_actionQuitter_triggered();
 
+    void on_action4x4_cases_triggered();
+    void on_action5x5_cases_triggered();
+    void on_action6x6_cases_triggered();
+    void on_action7x7_cases_triggered();
+    void on_action8x8_cases_triggered();
 private:
     Ui::MainWindow *ui;
+    int NbCase = 16;
+    int COTE = 4;
 };
 #endif // MAINWINDOW_H

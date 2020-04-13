@@ -28,20 +28,25 @@ GameWidget::GameWidget(QWidget *parent) : QWidget(parent)
 
     srand(time(NULL)); //initialisation de la fonction rand()
     newGame(); //on crée une nouvelle partie
-
     timer->start();
 };
 
 GameWidget::~GameWidget(void){
     delete timer;
+    delete[] grid;
 }
 
 void GameWidget::timer_timeout(void){
     repaint();
 }
 
-void GameWidget::newGame(void) {
+void GameWidget::newGame(int cote) {
     // initialisation du score et de la grille des cases
+    COTE = cote;
+    NbCase = COTE * COTE;
+    forceFont = true;
+    delete[] grid;
+    grid = new Case[NbCase];
     score = 0;
     for(int i=0;i<NbCase;i++){
         grid[i].value = 0;
@@ -139,25 +144,25 @@ bool GameWidget::check_lost(){
 
 GameWidget::eventResult GameWidget::Up(){
     //appelé quand le bouton pressé est "haut"
-    MoveUp move;
+    MoveUp move(COTE);
     return action(&move);
 }
 
 GameWidget::eventResult GameWidget::Down(){
     //appelé quand le bouton pressé est "bas"
-    MoveDown move;
+    MoveDown move(COTE);
     return action(&move);
 }
 
 GameWidget::eventResult GameWidget::Left(){
     //appelé quand le bouton pressé est "gauche"
-    MoveLeft move;
+    MoveLeft move(COTE);
     return action(&move);
 }
 
 GameWidget::eventResult GameWidget::Right(){
     //appelé quand le bouton pressé est "droite"
-    MoveRight move;
+    MoveRight move(COTE);
     return action(&move);
 }
 
